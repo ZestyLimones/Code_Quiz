@@ -61,7 +61,7 @@ getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
     localStorage.setItem("mostRecentScore", score);
 
-    return window.location.assign("/end.html");
+    return window.location.assign("./end.html");
   }
 
   questionCounter++;
@@ -81,12 +81,14 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
+//add timer in here
+
 choices.forEach((choice) => {
-  choice.addEventListener("click", (e) => {
+  choice.addEventListener("click", (event) => {
     if (!acceptingAnswers) return;
 
     acceptingAnswers = false;
-    var selectedChoice = e.target;
+    var selectedChoice = event.target;
     var selectedAnswer = selectedChoice.dataset["number"];
 
     var classToApply =
