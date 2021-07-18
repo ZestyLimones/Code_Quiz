@@ -13,40 +13,48 @@ var availableQuestions = [];
 
 var questions = [
   {
-    question: "this is questions 1?",
-    choice1: "choice 1",
-    choice2: "correct answer",
-    choice3: "choice 3",
-    choice4: "choice 4",
+    question: "Inside which HTML element do we put the JavaScript?",
+    choice1: "<scripting>",
+    choice2: "<js>",
+    choice3: "<script>",
+    choice4: "<javascript>",
+    answer: 3,
+  },
+  {
+    question: "Where is the correct place to insert a JavaScript?",
+    choice1: "In the <head> of the HTML.",
+    choice2: "In the <body> of the HTML.",
+    choice3: "In the <head> and <body> of the HTML.",
+    choice4: "In the CSS",
     answer: 2,
   },
   {
-    question: "this is questions 2?",
-    choice1: "choice 1",
-    choice2: "correct answer",
-    choice3: "choice 3",
-    choice4: "choice 4",
-    answer: 2,
+    question: "How do we write 'Hello World' in an alert box?",
+    choice1: "msgBox('Hello World')",
+    choice2: "msg('Hello World')",
+    choice3: "alertBox('Hello World')",
+    choice4: "alert('Hello World')",
+    answer: 4,
   },
   {
-    question: "this is questions 3?",
-    choice1: "choice 1",
-    choice2: "correct answer",
-    choice3: "choice 3",
-    choice4: "choice 4",
-    answer: 2,
+    question: "How do you create a function in JavaScript?",
+    choice1: "function myFunction()",
+    choice2: "function {myFunction()}",
+    choice3: "function:myFunction()",
+    choice4: "function = myFunction()",
+    answer: 1,
   },
   {
-    question: "this is questions 4?",
-    choice1: "choice 1",
-    choice2: "correct answer",
-    choice3: "choice 3",
-    choice4: "choice 4",
-    answer: 2,
+    question: "How do you write an IF statement in JavaScript?",
+    choice1: "if i = 5",
+    choice2: "if i === 5",
+    choice3: "if i === 5 then",
+    choice4: "if (i ===5)",
+    answer: 4,
   },
 ];
 
-var SCORE_POINTS = 100;
+var SCORE_POINTS = 10;
 var MAX_QUESTIONS = 4;
 var secondsLeft = 60;
 
@@ -56,7 +64,6 @@ function startGame() {
   setTime();
   availableQuestions = [...questions];
   getNewQuestion();
-  console.log("from inside the start game function");
 }
 
 function setTime() {
@@ -72,8 +79,7 @@ function setTime() {
   }, 1000);
 }
 
-getNewQuestion = () => {
-  console.log("from inside getNewQuestion");
+var getNewQuestion = function () {
   if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
     localStorage.setItem("mostRecentScore", score);
 
@@ -86,7 +92,7 @@ getNewQuestion = () => {
   currentQuestion = availableQuestions[questionsIndex];
   question.innerText = currentQuestion.question;
 
-  choices.forEach((choice) => {
+  choices.forEach(function (choice) {
     var number = choice.dataset["number"];
     choice.innerText = currentQuestion["choice" + number];
   });
@@ -95,7 +101,7 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
-choices.forEach((choice) => {
+choices.forEach(function (choice) {
   choice.addEventListener("click", (event) => {
     if (!acceptingAnswers) return;
 
@@ -103,16 +109,21 @@ choices.forEach((choice) => {
     var selectedChoice = event.target;
     var selectedAnswer = selectedChoice.dataset["number"];
 
-    var classToApply =
-      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+    var classToApply;
 
-    console.log(classToApply);
-
-    if (classToApply === "correct") {
+    if (selectedAnswer == currentQuestion.answer) {
+      classToApply = "correct";
       incrementScore(SCORE_POINTS);
     } else {
+      classToApply = "incorrect";
       secondsLeft = secondsLeft - 10;
     }
+
+    // if (classToApply === "correct") {
+
+    // } else {
+
+    // }
 
     selectedChoice.parentElement.classList.add(classToApply);
 
@@ -123,7 +134,7 @@ choices.forEach((choice) => {
   });
 });
 
-incrementScore = (num) => {
+var incrementScore = function (num) {
   score += num;
   scoreText.innerText = score;
 };

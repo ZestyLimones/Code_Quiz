@@ -2,13 +2,16 @@ body {
   color: white;
 }
 
+#question {
+  margin-bottom: 15px;
+}
+
 .choice-container {
   display: flex;
-  margin-bottom: 0.8rem;
+  margin-bottom: 10px;
   width: 100%;
-  border-radius: 4px;
-  background: blue;
-  font-size: 3rem;
+  border-radius: 5px;
+  background: blueviolet;
   min-width: 80rem;
 }
 
@@ -19,10 +22,12 @@ body {
 .choice-prefex {
   padding: 2rem 2.5rem;
   color: white;
+  font-size: 20px;
 }
 
 .choice-text {
-  padding: 2 rem;
+  font-size: 20px;
+  padding: 2rem;
   width: 100%;
 }
 
@@ -42,7 +47,7 @@ body {
 
 .hud-prefex {
   text-align: center;
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 .hud-main-text {
@@ -53,14 +58,8 @@ body {
   font-size: 40px;
 }
 
-#time {
-  font-size: 100px;
+#time-remaining {
+  font-size: 20px;
   border: red;
   color: white;
-}
-
-@media screen and (max-width: 768px) {
-  .choice-container {
-    min-width: 40rem;
-  }
 }
