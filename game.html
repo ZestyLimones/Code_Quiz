@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Page</title>
-    <link rel="stylesheet" href="./assets/style.css">
-    <link rel="stylesheet" href="./assets/game.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/game.css">
 </head>
 
 <body>
@@ -15,12 +15,10 @@
         <div id="game" class="justify-center flex-column">
             <div id="hud">
                 <div class="hud-item">
-                    <h1 id="progressText" class="hud-prefix">
-                        Question
-                    </h1>
-                    <div id="progressBar">
-                        <div id="progressBarFull"></div>
-                    </div>
+                    <p class="hud-prefex">
+                        Time Remaining
+                    </p>
+                    <div id="time">60</div>
                 </div>
                 <div class="hud-item">
                     <p class="hud-prefex">
@@ -36,24 +34,24 @@
             </div>
             <div class="choice-container">
                 <p class="choice-prefex">A</p>
-                <p class="choice-text" data-number="1">test choice 1</p>
+                <p class="choice-text" data-number="1">choice 1</p>
             </div>
             <div class="choice-container">
                 <p class="choice-prefex">B</p>
-                <p class="choice-text" data-number="2">test choice 2</p>
+                <p class="choice-text" data-number="2">choice 2</p>
             </div>
             <div class="choice-container">
                 <p class="choice-prefex">C</p>
-                <p class="choice-text" data-number="3">test choice 3</p>
+                <p class="choice-text" data-number="3">choice 3</p>
             </div>
             <div class="choice-container">
                 <p class="choice-prefex">D</p>
-                <p class="choice-text" data-number="4">test choice 4</p>
+                <p class="choice-text" data-number="4">choice 4</p>
             </div>
         </div>
     </div>
 
-    <script src='assets/script.js'></script>
+    <script src='assets/js/script.js'></script>
     </body>
 
 </html>

@@ -3,6 +3,7 @@ var choices = Array.from(document.querySelectorAll(".choice-text"));
 var progressText = document.querySelector("#progressText");
 var scoreText = document.querySelector("#score");
 var progressBarFull = document.querySelector("#progressBarFull");
+var timeEl = document.querySelector("#time");
 
 var currentQuestion = {};
 var acceptingAnswers = true;
@@ -47,13 +48,28 @@ var questions = [
 
 var SCORE_POINTS = 100;
 var MAX_QUESTIONS = 4;
+var secondsLeft = 60;
 
 function startGame() {
   questionCounter = 0;
   socre = 0;
+  setTime();
   availableQuestions = [...questions];
   getNewQuestion();
   console.log("from inside the start game function");
+}
+
+function setTime() {
+  var timerInterval = setInterval(function () {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval);
+
+      return window.location.assign("./end.html");
+    }
+  }, 1000);
 }
 
 getNewQuestion = () => {
@@ -65,8 +81,6 @@ getNewQuestion = () => {
   }
 
   questionCounter++;
-  progressText.innnerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
-  progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
 
   var questionsIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionsIndex];
@@ -80,8 +94,6 @@ getNewQuestion = () => {
   availableQuestions.splice(questionsIndex, 1);
   acceptingAnswers = true;
 };
-
-//add timer in here
 
 choices.forEach((choice) => {
   choice.addEventListener("click", (event) => {
@@ -98,6 +110,8 @@ choices.forEach((choice) => {
 
     if (classToApply === "correct") {
       incrementScore(SCORE_POINTS);
+    } else {
+      secondsLeft = secondsLeft - 10;
     }
 
     selectedChoice.parentElement.classList.add(classToApply);
@@ -105,7 +119,7 @@ choices.forEach((choice) => {
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
-    }, 1000);
+    }, 100);
   });
 });
 

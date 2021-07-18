@@ -1,0 +1,66 @@
+body {
+  color: white;
+}
+
+.choice-container {
+  display: flex;
+  margin-bottom: 0.8rem;
+  width: 100%;
+  border-radius: 4px;
+  background: blue;
+  font-size: 3rem;
+  min-width: 80rem;
+}
+
+.choice-container:hover {
+  cursor: pointer;
+}
+
+.choice-prefex {
+  padding: 2rem 2.5rem;
+  color: white;
+}
+
+.choice-text {
+  padding: 2 rem;
+  width: 100%;
+}
+
+.correct {
+  background: green;
+}
+
+.incorrect {
+  background: red;
+}
+
+/* Heads up display */
+#hud {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hud-prefex {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.hud-main-text {
+  text-align: center;
+}
+
+#question {
+  font-size: 40px;
+}
+
+#time {
+  font-size: 100px;
+  border: red;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .choice-container {
+    min-width: 40rem;
+  }
+}
