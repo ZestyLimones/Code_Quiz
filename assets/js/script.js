@@ -2,11 +2,10 @@ var question = document.querySelector("#question");
 var choices = Array.from(document.querySelectorAll(".choice-text"));
 var progressText = document.querySelector("#progressText");
 var scoreText = document.querySelector("#score");
-var progressBarFull = document.querySelector("#progressBarFull");
 var timeEl = document.querySelector("#time");
 
 var currentQuestion = {};
-var acceptingAnswers = true;
+var acceptedAnswers = true;
 var score = 0;
 var questionCounter = 0;
 var availableQuestions = [];
@@ -98,14 +97,14 @@ var getNewQuestion = function () {
   });
 
   availableQuestions.splice(questionsIndex, 1);
-  acceptingAnswers = true;
+  acceptedAnswers = true;
 };
 
 choices.forEach(function (choice) {
   choice.addEventListener("click", (event) => {
-    if (!acceptingAnswers) return;
+    if (!acceptedAnswers) return;
 
-    acceptingAnswers = false;
+    acceptedAnswers = false;
     var selectedChoice = event.target;
     var selectedAnswer = selectedChoice.dataset["number"];
 
