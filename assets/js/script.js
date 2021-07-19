@@ -54,13 +54,13 @@ var questions = [
   },
 ];
 
-var SCORE_POINTS = 10;
-var MAX_QUESTIONS = 4;
+var scorePoints = 10;
+var maxQuestions = 4;
 var secondsLeft = 60;
 
 function startGame() {
   questionCounter = 0;
-  socre = 0;
+  score = 0;
   setTime();
   availableQuestions = [...questions];
   getNewQuestion();
@@ -80,7 +80,7 @@ function setTime() {
 }
 
 var getNewQuestion = function () {
-  if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+  if (availableQuestions.length === 0 || questionCounter > maxQuestions) {
     localStorage.setItem("mostRecentScore", score);
 
     return window.location.assign("./end.html");
@@ -113,17 +113,11 @@ choices.forEach(function (choice) {
 
     if (selectedAnswer == currentQuestion.answer) {
       classToApply = "correct";
-      incrementScore(SCORE_POINTS);
+      incrementScore(scorePoints);
     } else {
       classToApply = "incorrect";
       secondsLeft = secondsLeft - 10;
     }
-
-    // if (classToApply === "correct") {
-
-    // } else {
-
-    // }
 
     selectedChoice.parentElement.classList.add(classToApply);
 

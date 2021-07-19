@@ -5,11 +5,9 @@ var mostRecentScore = localStorage.getItem("mostRecentScore");
 
 var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-var MAX_HIGH_SCORES = 5;
+var maxHighScore = 5;
 
 finalScore.innerText = mostRecentScore;
-
-console.log("you are in end.js");
 
 username.addEventListener("keyup", () => {
   saveScoreBtn.disabled = !username.value;
