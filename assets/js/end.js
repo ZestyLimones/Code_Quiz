@@ -9,11 +9,11 @@ var maxHighScore = 5;
 
 finalScore.innerText = mostRecentScore;
 
-username.addEventListener("keyup", () => {
+username.addEventListener("keyup", function () {
   saveScoreBtn.disabled = !username.value;
 });
 
-saveHighScore = (event) => {
+saveHighScore = function (event) {
   event.preventDefault();
 
   var score = {
@@ -23,7 +23,7 @@ saveHighScore = (event) => {
 
   highScores.push(score);
 
-  highScores.sort((a, b) => {
+  highScores.sort(function (a, b) {
     return b.score - a.score;
   });
 

@@ -101,7 +101,7 @@ var getNewQuestion = function () {
 };
 
 choices.forEach(function (choice) {
-  choice.addEventListener("click", (event) => {
+  choice.addEventListener("click", function (event) {
     if (!acceptedAnswers) return;
 
     acceptedAnswers = false;
@@ -120,7 +120,7 @@ choices.forEach(function (choice) {
 
     selectedChoice.parentElement.classList.add(classToApply);
 
-    setTimeout(() => {
+    setTimeout(function () {
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
     }, 100);
