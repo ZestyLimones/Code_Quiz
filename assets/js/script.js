@@ -1,16 +1,15 @@
 var question = document.querySelector("#question");
 var choices = Array.from(document.querySelectorAll(".choice-text"));
-var progressText = document.querySelector("#progressText");
 var scoreText = document.querySelector("#score");
 var timeEl = document.querySelector("#time");
 
 var currentQuestion = {};
 var acceptedAnswers = true;
 var score = 0;
-var questionCounter = 0;
+var qCounter = 0;
 var availableQuestions = [];
 
-var questions = [
+var quizQuestions = [
   {
     question: "Inside which HTML element do we put the JavaScript?",
     choice1: "<scripting>",
@@ -58,10 +57,10 @@ var maxQuestions = 4;
 var secondsLeft = 60;
 
 function startGame() {
-  questionCounter = 0;
+  qCounter = 0;
   score = 0;
   setTime();
-  availableQuestions = [...questions];
+  availableQuestions = [...quizQuestions];
   getNewQuestion();
 }
 
@@ -79,16 +78,16 @@ function setTime() {
 }
 
 var getNewQuestion = function () {
-  if (availableQuestions.length === 0 || questionCounter > maxQuestions) {
+  if (availableQuestions.length === 0 || qCounter > maxQuestions) {
     localStorage.setItem("mostRecentScore", score);
 
     return window.location.assign("./end.html");
   }
 
-  questionCounter++;
+  qCounter++;
 
-  var questionsIndex = Math.floor(Math.random() * availableQuestions.length);
-  currentQuestion = availableQuestions[questionsIndex];
+  var qIndex = Math.floor(Math.random() * availableQuestions.length);
+  currentQuestion = availableQuestions[qIndex];
   question.innerText = currentQuestion.question;
 
   choices.forEach(function (choice) {
@@ -96,7 +95,7 @@ var getNewQuestion = function () {
     choice.innerText = currentQuestion["choice" + number];
   });
 
-  availableQuestions.splice(questionsIndex, 1);
+  availableQuestions.splice(qIndex, 1);
   acceptedAnswers = true;
 };
 
