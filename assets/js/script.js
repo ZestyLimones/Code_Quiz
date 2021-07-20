@@ -7,7 +7,7 @@ var currentQuestion = {};
 var acceptedAnswers = true;
 var score = 0;
 var qCounter = 0;
-var availableQuestions = [];
+var allAvailableQuestions = [];
 
 var quizQuestions = [
   {
@@ -60,7 +60,7 @@ function startGame() {
   qCounter = 0;
   score = 0;
   setTime();
-  availableQuestions = [...quizQuestions];
+  allAvailableQuestions = [...quizQuestions];
   getNewQuestion();
 }
 
@@ -78,16 +78,16 @@ function setTime() {
 }
 
 var getNewQuestion = function () {
-  if (availableQuestions.length === 0 || qCounter > maxQuestions) {
-    localStorage.setItem("mostRecentScore", score);
+  if (allAvailableQuestions.length === 0 || qCounter > maxQuestions) {
+    localStorage.setItem("recentScore", score);
 
     return window.location.assign("./end.html");
   }
 
   qCounter++;
 
-  var qIndex = Math.floor(Math.random() * availableQuestions.length);
-  currentQuestion = availableQuestions[qIndex];
+  var qIndex = Math.floor(Math.random() * allAvailableQuestions.length);
+  currentQuestion = allAvailableQuestions[qIndex];
   question.innerText = currentQuestion.question;
 
   choices.forEach(function (choice) {
@@ -95,7 +95,7 @@ var getNewQuestion = function () {
     choice.innerText = currentQuestion["choice" + number];
   });
 
-  availableQuestions.splice(qIndex, 1);
+  allAvailableQuestions.splice(qIndex, 1);
   acceptedAnswers = true;
 };
 
