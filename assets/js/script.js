@@ -53,7 +53,7 @@ var quizQuestions = [
 ];
 
 var scorePoints = 10;
-var maxQuestions = 4;
+var maxQuestions = 5;
 var secondsLeft = 60;
 
 function startGame() {
