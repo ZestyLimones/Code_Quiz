@@ -22,3 +22,5 @@ After the user enters in their initials, they will be taken to the high scores p
 The user may then return to the home screen.
 
 ![high score screen to view high scores](./assets/images/Score_Board.jpg)
+
+\*Reference used: https://youtu.be/f4fB9Xg2JEY

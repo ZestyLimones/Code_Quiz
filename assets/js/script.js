@@ -1,13 +1,14 @@
 var question = document.querySelector("#question");
-var choices = Array.from(document.querySelectorAll(".choice-text"));
+var choices = document.querySelectorAll(".choice-text");
 var scoreText = document.querySelector("#score");
 var timeEl = document.querySelector("#time");
+var gameContainer = document.querySelector("#game-container");
 
 var currentQuestion = {};
 var acceptedAnswers = true;
 var score = 0;
 var qCounter = 0;
-var allAvailableQuestions = [];
+var quizQuestions = [];
 
 var quizQuestions = [
   {
@@ -60,8 +61,34 @@ function startGame() {
   qCounter = 0;
   score = 0;
   setTime();
-  allAvailableQuestions = [...quizQuestions];
   getNewQuestion();
+  gameContainer.addEventListener("click", gameClick);
+}
+
+function gameClick(event) {
+  if (!acceptedAnswers) return;
+
+  acceptedAnswers = false;
+  var selectedChoice = event.target;
+  console.log(event.target);
+  var selectedAnswer = selectedChoice.dataset["number"];
+
+  var classToApply;
+
+  if (selectedAnswer == currentQuestion.answer) {
+    classToApply = "correct";
+    incrementScore(scorePoints);
+  } else {
+    classToApply = "incorrect";
+    secondsLeft = secondsLeft - 10;
+  }
+
+  selectedChoice.parentElement.classList.add(classToApply);
+
+  setTimeout(function () {
+    selectedChoice.parentElement.classList.remove(classToApply);
+    getNewQuestion();
+  }, 100);
 }
 
 function setTime() {
@@ -72,59 +99,32 @@ function setTime() {
     if (secondsLeft === 0) {
       clearInterval(timerInterval);
 
-      return window.location.assign("./end.html");
+      window.location.assign("./end.html");
     }
   }, 1000);
 }
 
 var getNewQuestion = function () {
-  if (allAvailableQuestions.length === 0 || qCounter > maxQuestions) {
+  if (quizQuestions.length === 0 || qCounter > maxQuestions) {
     localStorage.setItem("recentScore", score);
 
-    return window.location.assign("./end.html");
+    window.location.assign("./end.html");
   }
 
   qCounter++;
 
-  var qIndex = Math.floor(Math.random() * allAvailableQuestions.length);
-  currentQuestion = allAvailableQuestions[qIndex];
+  var qIndex = Math.floor(Math.random() * quizQuestions.length);
+  currentQuestion = quizQuestions[qIndex];
   question.innerText = currentQuestion.question;
 
-  choices.forEach(function (choice) {
-    var number = choice.dataset["number"];
-    choice.innerText = currentQuestion["choice" + number];
-  });
+  for (var i = 0; i < choices.length; i++) {
+    var number = choices[i].dataset["number"];
+    choices[i].innerText = currentQuestion["choice" + number];
+  }
 
-  allAvailableQuestions.splice(qIndex, 1);
+  quizQuestions.splice(qIndex, 1);
   acceptedAnswers = true;
 };
-
-choices.forEach(function (choice) {
-  choice.addEventListener("click", function (event) {
-    if (!acceptedAnswers) return;
-
-    acceptedAnswers = false;
-    var selectedChoice = event.target;
-    var selectedAnswer = selectedChoice.dataset["number"];
-
-    var classToApply;
-
-    if (selectedAnswer == currentQuestion.answer) {
-      classToApply = "correct";
-      incrementScore(scorePoints);
-    } else {
-      classToApply = "incorrect";
-      secondsLeft = secondsLeft - 10;
-    }
-
-    selectedChoice.parentElement.classList.add(classToApply);
-
-    setTimeout(function () {
-      selectedChoice.parentElement.classList.remove(classToApply);
-      getNewQuestion();
-    }, 100);
-  });
-});
 
 var incrementScore = function (num) {
   score += num;
